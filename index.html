@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея Фриды Кало</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #800020;
+            color: #FFF8F0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .museum-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            border-bottom: 2px solid #FFF8F0;
+            margin-bottom: 50px;
+        }
+        
+        .museum-header h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: normal;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #FFF8F0;
+            margin-bottom: 10px;
+        }
+        
+        .museum-header .subtitle {
+            font-size: 16px;
+            letter-spacing: 5px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .gallery {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+            width: 100%;
+            flex: 1;
+        }
+        
+        .exhibit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px 30px;
+        }
+        
+        .exhibit {
+            background: #FFF8F0;
+            color: #4a0010;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-width: 0; 
+            max-width: 100%;
+        }
+        
+        .exhibit:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+        }
+        
+        .artwork-frame {
+            width: 100%;
+            height: 300px;
+            background-color: #d4c5b9;
+            overflow: hidden;
+            border-radius: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            border: 8px solid #faf3eb;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+        
+        .artwork-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease;
+            max-width: 100%;
+        }
+        
+        .exhibit:hover .artwork-frame img {
+            transform: scale(1.05);
+        }
+        
+        .exhibit-info {
+            padding: 5px 10px 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .exhibit-info .artist {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #800020;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .exhibit-info h3 {
+            font-size: 22px;
+            font-weight: normal;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: #3d000b;
+        }
+        
+        .exhibit-info .description {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #5c3a40;
+            flex-grow: 1;
+        }
+        
+        .exhibit-info .technique {
+            margin-top: 15px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #a08085;
+            border-top: 1px solid #e0d3cd;
+            padding-top: 12px;
+        }
+        
+        .site-footer {
+            text-align: center;
+            padding: 30px 20px 40px;
+            border-top: 1px solid rgba(255,248,240,0.3);
+            background-color: #800020;
+            margin-top: auto;
+        }
+        
+        .site-footer .copyright {
+            font-size: 12px;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #FFF8F0;
+            text-decoration: none;
+            border: 1px solid #FFF8F0;
+            padding: 12px 30px;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .back-link:hover {
+            background: #FFF8F0;
+            color: #800020;
+        }
+        
+        @media (max-width: 600px) {
+            .exhibit-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .artwork-frame {
+                height: 250px;
+            }
+            
+            .museum-header h1 {
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="museum-header">
+        <h1>Галерея Фриды Кало</h1>
+        <p class="subtitle">«Да здравствует жизнь!»</p>
+    </header>
+
+    <main class="gallery">
+        <div class="exhibit-grid">
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                   <img src="selfport.JPG" alt="Автопортрет с терновым ожерельем и колибри">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Autorretrato con Collar de Espinas</p>
+                    <h3>«Автопортрет с терновым ожерельем и колибри»</h3>
+                    <p class="description">
+                        Картина написана в год развода с Диего Риверой (хотя они повторно поженились в том же году).
+                        Фрида переживает глубокий эмоциональный кризис, одиночество и физическую боль.
+                        Она несет терновый венец разбитого сердца, а надежда на счастье (колибри) мертва.
+                        Животные вокруг — её единственные спутники в боли.
+                    </p>
+                    <p class="technique">Автопортрет • 1940</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                   <img src="second.JPEG" alt="Автопортрет в бархатном платье">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Autorretrato con traje de terciopelo</p>
+                    <h3>«Автопортрет в бархатном платье»</h3>
+                    <p class="description">
+                        Это первая серьезная работа Фриды Кало, написанная в возрасте 19 лет.
+                        Картина создавалась в период восстановления после тяжелой аварии, когда художница была прикована к постели.
+                        Это первый автопортрет, где Фрида начинает исследовать собственную боль и личность, закладывая основу для всех своих будущих работ.
+                        Картина была подарена её первому парню, Алехандро Гомесу Ариасу.
+                    </p>
+                    <p class="technique">Автопортрет • 1926</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="third.JPEG" alt="Автопортрет на границе между Мексикой и США">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Autorretano en la frontera entre México y los Estados Unidos</p>
+                    <h3>«Автопортрет на границе между Мексикой и США»</h3>
+                    <p class="description">
+                        Картина написана под впечатлением от жизни Фриды в США во время Великой депрессии, где она чувствовала себя чужой, скучая по Мексике.
+                        Фрида показывает себя как мост между двумя культурами, но явно тоскует по мексиканским корням, противопоставляя живую историю Мексики бездушному индустриальному прогрессу США.
+                    </p>
+                    <p class="technique">Автопортрет • 1932</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="fourth.JPG" alt="Я и моя кукла">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Yo y mi muñeca</p>
+                    <h3>«Я и моя кукла»</h3>
+                    <p class="description">
+                        Картина читается как размышление о материнстве, одиночестве и травме.
+                        Фрида, которая не могла иметь детей после аварии, держит куклу как замену ребенку, но эта замена — холодная, искусственная, безжизненная.
+                        Кукла становится символом пустоты и несостоявшейся материнской любви.
+                    </p>
+                    <p class="technique">Автопортрет • 1937</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="fifth.JPG" alt="Две Фриды">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Las dos Fridas</p>
+                    <h3>«Две Фриды»</h3>
+                    <p class="description">
+                        Фрида показывает расщепление личности после развода: одна часть (европейская, отвергнутая) умирает, другая (мексиканская, сильная) выживает.
+                        Но они неразрывно связаны — невозможно отрезать часть себя.
+                        Это также размышление о двух наследиях Фриды: европейском (отец) и мексиканском (мать).
+                    </p>
+                    <p class="technique">Автопортрет • 1939</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="sixth.JPEG" alt="Портрет Кристины, моей сестры">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Retrato de Cristina, Mi Hermana</p>
+                    <h3>«Портрет Кристины, моей сестры»</h3>
+                    <p class="description">
+                        Это единственное известное полотно, на котором Фрида Кало изобразила свою младшую сестру.
+                        Картина была создана в ключевой для художницы период — она оправлялась после тяжелой аварии 1925 года и начинала самостоятельный путь в искусстве.
+                    </p>
+                    <p class="technique">Портрет • 1928</p>
+                </div>
+            </div>
+            
+            <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="seventh.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">El suicidio de Dorothy Hale</p>
+                    <h3>«Самоубийство Дороти Хейл»</h3>
+                    <p class="description">
+                        Фрида получила заказ от Клэр Бут Люс — богатой писательницы и подруги Дороти Хейл.
+                        Люс хотела, чтобы Фрида написала традиционный «рекуэрдо» (памятный портрет умершей) для матери Дороти.
+                        Вместо этого Фрида создала шокирующую картину, изображающую само событие самоубийства.
+                        Клэр Бут Люс была в ярости. Она хотела утешительный портрет, а получила документальную картину смерти.
+                        Она спрятала работу и, по слухам, хотела уничтожить её.
+                        В итоге она продала картину (или отдала), и сейчас она находится в частной коллекции.
+                    </p>
+                    <p class="technique">Повествовательная картина • 1938</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="eighth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Autorretrato con cabello corto</p>
+                    <h3>«Автопортрет с остриженными волосами»</h3>
+                    <p class="description">
+                        Это автопортрет прощания с ролью «жены». Фрида больше не хочет быть красивой для Диего.
+			Она отказывается от своей женственности по его вкусу — и делает это публично, демонстративно.
+			Но эта жесткость не победа.
+			Пустая комната, одиночество, обрезанные волосы на полу — всё говорит о боли, которая стоит за этим бунтом. Она бросает вызов, но платит за это одиночеством.
+                    </p>
+                    <p class="technique">Автопортрет • 1940</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="ninth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Henry Ford Hospital</p>
+                    <h3>«Больница Генри Форда»</h3>
+                    <p class="description">
+			«Больница Генри Форда» — это не автопортрет в классическом смысле, а документальная исповедь.
+			Фрида не просто изображает себя — она визуализирует потерю.
+                        Эта картина — один из первых в истории искусства примеров откровенного изображения женского выкидыша.
+			Фрида разбила табу: она показала не идеализированное материнство, а его травматическую сторону.
+			Картина повлияла на феминистское искусство 1970-х годов (например, на работы Джуди Чикаго и Мириам Шапиро).
+                    </p>
+                    <p class="technique">Автопортрет • 1932</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="tenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Sin esperanza</p>
+                    <h3>«Без надежды»</h3>
+                    <p class="description">
+			В 1945 году состояние Фриды резко ухудшилось.
+			Из-за многочисленных операций и сильных болей она практически полностью потеряла аппетит и сильно истощала.
+			Врачи, опасаясь за её жизнь, назначили строжайший постельный режим и насильственное кормление через каждые два часа пюреобразной пищей, чтобы хоть как-то поддерживать её силы.
+			Сама Фрида воспринимала эту процедуру как пытку, что и легло в основу сюжета.
+			На обороте холста она оставила надпись: «У меня не осталось ни капли надежды… Время движется в такт тому, что находится в данный момент в моем животе…» 
+                    </p>
+                    <p class="technique">Автопортрет • 1945</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="eleventh.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">La columna rota</p>
+                    <h3>«Сломанная колонна»</h3>
+                    <p class="description">
+			К 1944 году здоровье Фриды, подорванное аварией 1925 года (когда её тело пронзил металлический поручень), окончательно ухудшилось.
+			Она перенесла несколько сложных операций на позвоночнике, которые не принесли облегчения, а лишь усилили мучения.
+			Чтобы просто стоять или сидеть, Фриде приходилось носить жёсткие корсеты (кожанные, гипсовые, металлические).
+			«Сломанная колонна» — это визуализация того, как она чувствовала себя каждый день.
+                    </p>
+                    <p class="technique">Автопортрет • 1944</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="twelvth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">El venado herido</p>
+                    <h3>«Раненый олень»</h3>
+                    <p class="description">
+			В 1946 году Фрида перенесла сложную операцию на позвоночнике в Нью-Йорке (спондилодез — сращение позвонков).
+			Операция не удалась: боль вернулась, а надежды на выздоровление рухнули. Фрида была морально сломлена.
+			В письмах она писала о желании «убежать» от реальности.
+			Картина была написана сразу после возвращения в Мексику, когда она лежала в постели, но уже могла держать кисть.
+                    </p>
+                    <p class="technique">Автопортрет • 1946</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="thirth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Retrato de una mujer de blanco</p>
+                    <h3>«Портрет женщины в белом»</h3>
+                    <p class="description">
+			Если автопортреты Фриды — это всегда крик, боль, страсть, политика, идентичность, то портреты других людей у неё почти всегда сдержанные, отстранённые, почти пустые.
+			Она не психологизирует чужих людей. Она фиксирует их внешность вежливо и аккуратно, без вторжения во внутренний мир.
+			«Портрет женщины в белом» — идеальный пример этого подхода. Женщина красива, элегантна, но мы ничего не знаем о ней.
+			И Фрида не хочет, чтобы мы знали.
+			Её задача — не раскрыть душу модели, а показать своё мастерство и, возможно, выразить своё отношение через незавершённость.
+                    </p>
+                    <p class="technique">Портрет • 1930</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="fourteenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Mis abuelos, mis padres, y yo</p>
+                    <h3>«Мои бабушка и дедушка, мои родители и я»</h3>
+                    <p class="description">
+			Картина была написана в 1936 году — через год после принятия в Германии Нюрнбергских расовых законов.
+			Эти законы предписывали евреям доказывать «чистоту крови» с помощью генеалогических схем, запрещали межрасовые браки и стали юридической основой для преследований.
+			Фрида Кало, чей отец был немецким евреем (иммигрировавшим в Мексику), создаёт эту картину как прямой политический вызов нацизму.
+			Она берёт тот самый формат — генеалогическое древо, который использовали нацисты, — и наполняет его противоположным смыслом: празднованием смешанного происхождения 
+                    </p>
+                    <p class="technique">Автопортрет • 1936</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="fifteenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">El camion</p>
+                    <h3>«Автобус»</h3>
+                    <p class="description">
+			Картина написана через четыре года после события, навсегда изменившего жизнь Фриды.
+			17 сентября 1925 года она ехала на автобусе, который столкнулся с трамваем.
+			В результате аварии Фрида получила тяжелейшие травмы: сломанный позвоночник, таз, ключицу, одиннадцать переломов правой ноги и проникающее ранение металлическим поручнем.
+			Именно после этого, прикованная к постели, она начала рисовать 
+                    </p>
+                    <p class="technique">Жанровая сцена • 1929</p>
+                </div>
+            </div>
+
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="sixteenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Retrato de Lupe Marín</p>
+                    <h3>«Портрет Лупе Марин»</h3>
+                    <p class="description">
+			Лупе Марин (1895–1983) была второй женой Диего Риверы (его брак с ней длился с 1922 по 1927 год) и матерью двух его дочерей.
+			После развода она оставалась важной фигурой в кругу мексиканских художников и интеллектуалов — музой, натурщицей, писательницей.
+			Когда Фрида начала встречаться с Риверой в 1928 году, Лупе отнеслась к юной сопернице с ревностью и даже угрожала ей оружием.
+			Тем примечательнее, что в 1929 году, сразу после свадьбы Фриды и Диего, Фрида пишет этот портрет.
+			Это был не просто акт примирения, но и смелое заявление: новая жена признаёт силу и место предыдущей.
+                    </p>
+                    <p class="technique">Портрет • 1929</p>
+                </div>
+            </div>
+
+ 	    <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="seventeenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Lo que el agua me dio</p>
+                    <h3>«Что мне дала вода»</h3>
+                    <p class="description">
+			Это нестандартный автопортрет, на котором Фрида Кало изображает не своё лицо, а свои ноги, выглядывающие из ванны, а всё пространство воды заполнено десятками символических образов, составляющих её биографию: здесь и деформированная ступня (напоминание о полиомиелите и аварии), и извергающийся вулкан с небоскрёбом (столкновение Мексики и США), и обнажённая женская фигура с верёвкой на шее (ощущение удушения от отношений с Диего Риверой), и раковина с пулевыми отверстиями (бесплодие, выкидыши), и скелет с мёртвой птицей (постоянное присутствие смерти).
+			Смысл картины раскрывается в её названии: вода (жизнь, время, подсознание) дала Фриде знание о себе как о ландшафте страдания и желания, способность увидеть свою жизнь целиком и переплавить травмы в искусство — это автопортрет-исповедь, где художница смотрит на зрителя не глазами, а всей своей судьбой, плавающей в ванне.
+                    </p>
+                    <p class="technique">Автопортрет • 1938</p>
+                </div>
+            </div>
+
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="eighteenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Diego y Frida</p>
+                    <h3>«Диего и Фрида»</h3>
+                    <p class="description">
+			Хотя формально это портрет пары, сама Фрида называла Диего любовью всей своей жизни и одновременно «вторым по счету несчастным случаем», который с ней произошел.
+			Их отношения были полны неверности, ссор и страданий, но при этом они не могли жить друг без друга.
+			Смысл этого портрета — визуальная метафора полного слияния двух личностей, их «неразделимости» в браке, попытка передать ту сверхсильную связь, когда грань между «я» и «ты» стирается, а также утверждение их принадлежности друг другу вопреки всем кризисам и разрывам, которые уже случались в их отношениях к 1944 году.
+                    </p>
+                    <p class="technique">Автопортрет • 1944</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="nineteenth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Unos cuantos piquetitos</p>
+                    <h3>«Всего-то несколько царапин!»</h3>
+                    <p class="description">
+			В 1934 году Фрида узнала о романе своего мужа Диего Риверы с её младшей и самой любимой сестрой Кристиной.
+			Эта связь длилась около года и стала для Фриды невыносимым ударом — предательство двух самых близких людей .
+			В это же время она прочитала в газете заметку о судебном процессе в Мехико: пьяный мужчина зарезал свою жену (по разным данным, нанёс около 20 ножевых ранений), а в суде оправдывался фразой: «Но это же были всего лишь несколько царапин!» (Unos cuantos piquetitos).
+			Цинизм убийцы поразил Фриду, и она использовала эту историю как метафору своего душевного состояния .
+                    </p>
+                    <p class="technique">Жанровая сцена • 1935</p>
+                </div>
+            </div>
+
+	        <div class="exhibit">
+                <div class="artwork-frame">
+                    <img src="twentieth.JPG" alt="Картина">
+                </div>
+                <div class="exhibit-info">
+                    <p class="artist">Viva la Vida (Sandías)</p>
+                    <h3>«Да здравствует жизнь (Арбузы)»</h3>
+                    <p class="description">
+			Вся жизнь Фриды Кало — это борьба с болью: полиомиелит в детстве, страшная авария в 18 лет (сломала позвоночник, таз, ключицу, 11 переломов ноги), десятки операций, выкидыши, измены мужа.
+			Её картины часто напоминали крик боли («Сломанная колонна», «Больница Генри Форда», «Всего-то несколько царапин!»).
+			Но последняя картина — не о боли. Она о любви к жизни.
+			Фрида уходит не с жалобой или проклятием, а с восклицанием: «Да здравствует жизнь!» Это делает работу особенно сильной.
+                    </p>
+                    <p class="technique">Натюрморт • 1954</p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+        <p class="copyright">© Галерея Фриды Кало • 2026</p>
+        <a href="#" class="back-link">ВЕРНУТЬСЯ В НАЧАЛО</a>
+    </footer>
+
+</body>
+</html>
